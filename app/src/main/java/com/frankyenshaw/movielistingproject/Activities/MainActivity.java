@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.movieDbApi.getMoviesWithIntent(this, intent);
                 break;
             case R.id.upcoming_button:
-                Log.w(TAG, "Upcoming Button Click");
                 intent = new IntentItem(this, new MoviesActivity().getClass(), IntentItem.IntentType.UPCOMING_MOVIES, "Upcoming Movies");
                 this.movieDbApi.getMoviesWithIntent(this, intent);
                 break;
