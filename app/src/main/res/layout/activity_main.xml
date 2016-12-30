@@ -21,14 +21,16 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
             android:text="Upcoming Movies"
-            android:layout_width="0dp" />
+            android:layout_width="0dp"
+            android:drawableLeft="@android:drawable/ic_input_add"/>
 
         <Button
             android:id="@+id/now_playing_button"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="Now Playing" />
+            android:text="Now Playing"
+            android:drawableLeft="@android:drawable/ic_media_play"/>
 
     </LinearLayout>
 
@@ -44,14 +46,16 @@
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="Popular " />
+            android:text="Popular "
+            android:drawableLeft="@android:drawable/stat_notify_chat"/>
 
         <Button
             android:id="@+id/top_rated_button"
             android:layout_width="0px"
             android:layout_height="fill_parent"
             android:layout_weight="0.5"
-            android:text="Top Rated" />
+            android:text="Top Rated"
+            android:drawableLeft="@android:drawable/star_big_on"/>
 
     </LinearLayout>
 </LinearLayout>
