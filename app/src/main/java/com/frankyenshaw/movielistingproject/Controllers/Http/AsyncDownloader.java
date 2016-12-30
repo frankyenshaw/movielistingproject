@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.frankyenshaw.movielistingproject.Controllers.Listeners.OnApiCallCompleted;
 import com.frankyenshaw.movielistingproject.Models.IntentItem;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,9 +39,10 @@ public class AsyncDownloader extends AsyncTask<String, Integer, String> {
 
     /**
      * Constructor used for launching new intent when finished
+     *
      * @param ctx
      * @param intent
-     * @param name - name of search type used to display on Activity Title
+     * @param name   - name of search type used to display on Activity Title
      */
     public AsyncDownloader(Context ctx, IntentItem intent, String name) {
         context = ctx;
@@ -54,7 +56,7 @@ public class AsyncDownloader extends AsyncTask<String, Integer, String> {
      * @param listener
      */
     public AsyncDownloader(OnApiCallCompleted listener) {
-        this.listener=listener;
+        this.listener = listener;
     }
 
     /**
@@ -65,7 +67,7 @@ public class AsyncDownloader extends AsyncTask<String, Integer, String> {
         super.onPreExecute();
 
         //If context is passed show progress dialog
-        if(context != null){
+        if (context != null) {
             dialog = new ProgressDialog(context);
             dialog.setMessage("Loading...");
             dialog.setProgressStyle(dialog.STYLE_SPINNER);
@@ -115,25 +117,25 @@ public class AsyncDownloader extends AsyncTask<String, Integer, String> {
         super.onPostExecute(jsonData);
 
         //If listener send callback otherwise execute intent
-        if(listener != null){
+        if (listener != null) {
             listener.onApiCallCompleted(jsonData);
-        }else {
+        } else {
             Intent intent;
-            switch (intentItem.getType()){
+            switch (intentItem.getType()) {
                 case PLAY_VIDEO:
                     String key = getFirstVideoKey(jsonData);
-                    if(key != null){
+                    if (key != null) {
                         intent = intentItem.getIntent(key);
                         context.startActivity(intent);
-                    }else{
-                        Toast.makeText(context,"Video Does Not Exist",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Video Does Not Exist", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 default:
                     intent = intentItem.getIntent(null);
                     intent.putExtra("jsonData", jsonData);
-                    intent.putExtra("title",title);
-                    intent.putExtra("type",intentItem.getType());
+                    intent.putExtra("title", title);
+                    intent.putExtra("type", intentItem.getType());
                     context.startActivity(intent);
                     break;
             }
@@ -152,7 +154,7 @@ public class AsyncDownloader extends AsyncTask<String, Integer, String> {
         try {
             jsonResponse = new JSONObject(jsonData);
             JSONArray results = jsonResponse.getJSONArray("results");
-            if (results != null && results.length() > 0){
+            if (results != null && results.length() > 0) {
                 JSONObject jsonVideo = results.getJSONObject(0);
                 return jsonVideo.getString("key");
             }

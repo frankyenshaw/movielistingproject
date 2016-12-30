@@ -1,9 +1,7 @@
 package com.frankyenshaw.movielistingproject.Controllers.Adapters;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,20 +52,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         holder.movieTitle.setTextSize(context.getResources().getDimension(R.dimen.textsize));
         holder.movieOverview.setText(movie.getOverview());
 
-        if(movie.isPopular()){
+        if (movie.isPopular()) {
             holder.playButtonImage.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             holder.playButtonImage.setVisibility(View.INVISIBLE);
         }
-        if(holder.posterImage != null){
+        if (holder.posterImage != null) {
             Picasso.with(context)
                     .load(movie.getPosterPath())
                     .placeholder(R.drawable.loading)
-                    .transform(new RoundedTransform(20,2))
+                    .transform(new RoundedTransform(20, 2))
                     .error(R.drawable.no_poster)
                     .into(holder.posterImage);
         }
-        if(holder.backdropImage != null) {
+        if (holder.backdropImage != null) {
             Picasso.with(context)
                     .load(movie.getBackdropPath())
                     .placeholder(R.drawable.loading)

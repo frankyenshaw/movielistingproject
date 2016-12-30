@@ -1,64 +1,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.8"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
+        android:layout_weight="0.8"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-        <Button
-            android:id="@+id/upcoming_button"
-            android:layout_height="fill_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:text="Upcoming Movies"
-            android:layout_width="0dp"
-            android:drawableLeft="@android:drawable/ic_input_add"/>
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/now_playing_button"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+            <Button
+                android:id="@+id/upcoming_button"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:text="Upcoming Movies"
+                android:layout_width="0dp"
+                android:drawableLeft="@android:drawable/ic_input_add" />
+
+            <Button
+                android:id="@+id/now_playing_button"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:text="Now Playing"
+                android:drawableLeft="@android:drawable/ic_media_play" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:text="Now Playing"
-            android:drawableLeft="@android:drawable/ic_media_play"/>
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/popular_button"
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:text="Popular "
+                android:drawableLeft="@android:drawable/stat_notify_chat" />
+
+            <Button
+                android:id="@+id/top_rated_button"
+                android:layout_width="0px"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5"
+                android:text="Top Rated"
+                android:drawableLeft="@android:drawable/star_big_on" />
+
+        </LinearLayout>
     </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/popular_button"
-            android:layout_width="0px"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:text="Popular "
-            android:drawableLeft="@android:drawable/stat_notify_chat"/>
-
-        <Button
-            android:id="@+id/top_rated_button"
-            android:layout_width="0px"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:text="Top Rated"
-            android:drawableLeft="@android:drawable/star_big_on"/>
-
-    </LinearLayout>
-</LinearLayout>
 
 
 </LinearLayout>
