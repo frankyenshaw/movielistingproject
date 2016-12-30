@@ -13,6 +13,7 @@ import com.frankyenshaw.movielistingproject.Models.IntentItem;
 
 public class MovieDbApi {
 
+    private static final String TAG = MovieDbApi.class.getSimpleName();
     private volatile static MovieDbApi uniqueInstance;
     private final String url = "http://api.themoviedb.org/3/";
     private final String API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed";
@@ -39,8 +40,12 @@ public class MovieDbApi {
     public String getPopularUrl(){
         return url + "movie/popular?api_key=" + API_KEY;
     }
+    public String getTopRatedUrl(){
+        return url + "movie/top_rated?api_key=" + API_KEY;
+    }
     public String getUpcomingUrl(){ return url + "movie/upcoming?api_key=" + API_KEY; }
     public String getVideosUrl(int movieId){ return url + "movie/"+movieId+"/videos?api_key=" + API_KEY; }
+    public String getSearchUrl(String query){ return url + "search/movie/videos?query="+query+"&api_key=" + API_KEY; }
 
     public String getEndpointUrl(IntentItem.IntentType type){
         String endpoint;
@@ -48,11 +53,14 @@ public class MovieDbApi {
             case POPULAR_MOVIES:
                 endpoint = this.getPopularUrl();
                 break;
+            case TOP_RATED:
+                endpoint = this.getTopRatedUrl();
+                break;
             case NOW_PLAYING_MOVIES:
                 endpoint = this.getNowPlayingUrl();
                 break;
             case UPCOMING_MOVIES:
-                endpoint = this.getNowPlayingUrl();
+                endpoint = this.getUpcomingUrl();
                 break;
             default:
                 endpoint = url;
@@ -61,7 +69,8 @@ public class MovieDbApi {
     }
 
     /**
-     * Helper function used to
+     * Used to retrieve data from movie endpoint and luanches new activity with RecyclerView
+     *
      * @param context
      * @param intent
      */
@@ -71,24 +80,54 @@ public class MovieDbApi {
         downloader.execute(endpoint);
     }
 
+    /**
+     * Not Used ATM
+     * Used to retrieve data from movie endpoint and luanches new activity with RecyclerView
+     *
+     * @param context
+     * @param intent
+     */
+    public void searchMoviesWithIntent(Context context, IntentItem intent,String query){
+        String endpoint = getSearchUrl(query);
+        AsyncDownloader downloader = new AsyncDownloader(context, intent, intent.getTitle());
+        downloader.execute(endpoint);
+    }
+
+    /**
+     * Used to retreive data from movie endpoint with paging options and returns results via callback
+     * Currently used for infinite scroll
+     *
+     * @param callback
+     * @param type
+     * @param page
+     */
     public void getMoviesWithCallback(OnApiCallCompleted callback, IntentItem.IntentType type,int page){
         String endpoint = this.getEndpointUrl(type);
-        if(page > 1){
-            StringBuilder sb = new StringBuilder();
-            sb.append(endpoint);
-            sb.append("&page="+page);
-            endpoint = sb.toString();
-        }
-        Log.d("TEST","URL: "+endpoint);
+        endpoint = appendPageAttribute(endpoint,page);
         AsyncDownloader downloader = new AsyncDownloader(callback);
         downloader.execute(endpoint);
     }
 
-    public void getVideosWithIntent(Context context, IntentItem intent){
-        String endpoint = this.getEndpointUrl(intent.getType());
+    /**
+     * Not used ATM but similar to getMoviesWithIntent
+     * Used to retreive video information for a specific movie and launches new activity
+     *
+     * @param context
+     * @param intent
+     */
+    public void getVideosWithIntent(Context context, IntentItem intent,int movieId){
+        String endpoint = getVideosUrl(movieId);
         AsyncDownloader downloader = new AsyncDownloader(context, intent, intent.getTitle());
         downloader.execute(endpoint);
     }
+
+    /**
+     * Hits videos endpoint for moveId and plays first video with YouTube API in new window
+     *
+     * @param context
+     * @param intent
+     * @param movieId
+     */
     public void getVideoAndPlayWithIntent(Context context, IntentItem intent,int movieId){
         String endpoint = getVideosUrl(movieId);
         AsyncDownloader downloader = new AsyncDownloader(context, intent, intent.getTitle());
@@ -96,5 +135,14 @@ public class MovieDbApi {
     }
 
 
+    private String appendPageAttribute(String endpoint, int page){
+        StringBuilder sb = new StringBuilder();
+        sb.append(endpoint);
+        if(page > 1){
+            sb.append("&page="+page);
+            Log.d(TAG,"Page appended URL: "+endpoint);
+        }
+        return sb.toString();
+    }
 
 }

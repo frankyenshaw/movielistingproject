@@ -1,6 +1,5 @@
 package com.frankyenshaw.movielistingproject.Activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -27,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         popularButton.setOnClickListener(this);
         final Button upcomingButton = (Button) findViewById(R.id.upcoming_button);
         upcomingButton.setOnClickListener(this);
+        final Button topRatedButton = (Button) findViewById(R.id.top_rated_button);
+        topRatedButton.setOnClickListener(this);
 
         this.movieDbApi = MovieDbApi.getInstance();
     }
@@ -44,8 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.movieDbApi.getMoviesWithIntent(this, intent);
                 break;
             case R.id.upcoming_button:
-                Log.w(TAG, "Upcoming Button Click");
                 intent = new IntentItem(this, new MoviesActivity().getClass(), IntentItem.IntentType.UPCOMING_MOVIES, "Upcoming Movies");
+                this.movieDbApi.getMoviesWithIntent(this, intent);
+                break;
+            case R.id.top_rated_button:
+                intent = new IntentItem(this, new MoviesActivity().getClass(), IntentItem.IntentType.TOP_RATED, "Top Rated Movies");
                 this.movieDbApi.getMoviesWithIntent(this, intent);
                 break;
             default:

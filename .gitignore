@@ -6,7 +6,6 @@
 /.idea/libraries
 /captures
 .externalNativeBuild
-.idea
 
 # OSX Files
 .DS_Store
