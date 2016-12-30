@@ -1,0 +1,19 @@
+#Android Studio
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/captures
+.externalNativeBuild
+.idea
+
+# OSX Files
+.DS_Store
+
+# generated files
+/bin
+/gen
+/src/main/gen
+/build
+/captures

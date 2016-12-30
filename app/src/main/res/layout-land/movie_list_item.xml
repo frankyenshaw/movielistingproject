@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grainsboro"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <!--<ImageView-->
+            <!--android:id="@+id/movieBackdropImage"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_weight="40"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:adjustViewBounds="true"-->
+            <!--/>-->
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="40">
+            <ImageView
+                android:id="@+id/movieBackdropImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:adjustViewBounds="true"
+                />
+
+            <ImageView
+                android:id="@+id/playButtonImage"
+                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:src="@drawable/video_play"
+                android:layout_marginLeft="10dp"
+                android:alpha=".5"
+                android:visibility="visible"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/movieInfoLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="60"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movieTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Title"
+                />
+
+            <TextView
+                android:id="@+id/movieOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Overview"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
