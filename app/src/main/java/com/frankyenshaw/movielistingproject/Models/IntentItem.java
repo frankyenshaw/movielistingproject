@@ -17,6 +17,7 @@ public class IntentItem {
         POPULAR_MOVIES,
         UPCOMING_MOVIES,
         NOW_PLAYING_MOVIES,
+        TOP_RATED,
         GET_VIDEOS;
     }
 
@@ -53,6 +54,7 @@ public class IntentItem {
             case POPULAR_MOVIES:
             case UPCOMING_MOVIES:
             case NOW_PLAYING_MOVIES:
+            case TOP_RATED:
                 return new Intent(context,targetClass);
             default:
                 Log.e(TAG,"Unknown Intent Type: "+type);
