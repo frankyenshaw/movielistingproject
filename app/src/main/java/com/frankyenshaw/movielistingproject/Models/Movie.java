@@ -163,18 +163,18 @@ public class Movie implements Parcelable {
      */
     public String toString() {
         //TODO: Add more attributes
-        return "title: '" + this.title+ "'";
+        return "title: '" + this.title + "'";
     }
 
     /**
      * Return true if movie voteAverage is greater than popular threshold
      * I set this to 6.5 because there were almost no content < 5
+     *
      * @return
      */
-    public Boolean isPopular(){
+    public Boolean isPopular() {
         return voteAverage >= 6.5;
     }
-
 
 
     @Override

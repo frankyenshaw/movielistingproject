@@ -40,8 +40,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
         for (int i = 0; i < lastVisibleItemPositions.length; i++) {
             if (i == 0) {
                 maxSize = lastVisibleItemPositions[i];
-            }
-            else if (lastVisibleItemPositions[i] > maxSize) {
+            } else if (lastVisibleItemPositions[i] > maxSize) {
                 maxSize = lastVisibleItemPositions[i];
             }
         }
@@ -102,7 +101,7 @@ public abstract class EndlessRecyclerViewScrollListener extends RecyclerView.OnS
     }
 
     //called in onRestoreState to setup page and itemcount again
-    public void restoreState(int page, int itemCount){
+    public void restoreState(int page, int itemCount) {
         this.currentPage = page;
         this.previousTotalItemCount = itemCount;
         this.loading = false;

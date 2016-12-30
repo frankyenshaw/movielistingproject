@@ -6,25 +6,25 @@
     android:orientation="vertical"
     android:layout_margin="8dp"
     android:paddingBottom="4dp"
-    android:paddingTop="4dp"
-    >
+    android:paddingTop="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="30">
+
             <ImageView
                 android:id="@+id/moviePosterImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-            />
+                android:adjustViewBounds="true" />
             />
 
             <ImageView
@@ -55,8 +55,7 @@
                 android:layout_marginRight="5dp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:text="Title"
-                />
+                android:text="Title" />
 
             <TextView
                 android:id="@+id/movieOverview"
@@ -67,7 +66,7 @@
                 android:maxLines="5"
                 android:ellipsize="end"
                 android:gravity="top"
-                android:text="Overview"/>
+                android:text="Overview" />
 
         </LinearLayout>
 

@@ -19,6 +19,7 @@ public class RoundedTransform implements com.squareup.picasso.Transformation {
 
     /**
      * radius is corner radii and margin is the boarder in dp
+     *
      * @param radius
      * @param margin
      */

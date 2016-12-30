@@ -13,22 +13,20 @@ import android.util.Log;
 import android.view.OrientationEventListener;
 import android.view.View;
 
+import com.frankyenshaw.movielistingproject.Controllers.Adapters.MovieAdapter;
+import com.frankyenshaw.movielistingproject.Controllers.Http.MovieDbApi;
 import com.frankyenshaw.movielistingproject.Controllers.Listeners.EndlessRecyclerViewScrollListener;
 import com.frankyenshaw.movielistingproject.Controllers.Listeners.ItemClickListener;
 import com.frankyenshaw.movielistingproject.Controllers.Listeners.OnApiCallCompleted;
-import com.frankyenshaw.movielistingproject.Controllers.Adapters.MovieAdapter;
-import com.frankyenshaw.movielistingproject.Controllers.Http.MovieDbApi;
 import com.frankyenshaw.movielistingproject.Models.IntentItem;
 import com.frankyenshaw.movielistingproject.Models.Movie;
 import com.frankyenshaw.movielistingproject.R;
-import com.google.android.youtube.player.YouTubeIntents;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by frankyenshaw on 12/29/16.
@@ -70,7 +68,7 @@ public class MoviesActivity extends AppCompatActivity
             Parcelable listState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE);
             populateRecyclerView();
             mRecyclerView.getLayoutManager().onRestoreInstanceState(listState);
-            scrollListener.restoreState(lastPage,movies.size());
+            scrollListener.restoreState(lastPage, movies.size());
         } else {
             if (intent != null) {
                 String jsonData = intent.getExtras().getString("jsonData");
@@ -99,7 +97,7 @@ public class MoviesActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 MovieDbApi movieDbApi = MovieDbApi.getInstance();
-                movieDbApi.getMoviesWithCallback(mOnApiCallRefreshCompleted,type,1);
+                movieDbApi.getMoviesWithCallback(mOnApiCallRefreshCompleted, type, 1);
             }
         });
 
@@ -114,7 +112,7 @@ public class MoviesActivity extends AppCompatActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putParcelableArrayList(MOVIES_STATE, movies);
-        outState.putInt(LAST_PAGE_STATE,lastPage);
+        outState.putInt(LAST_PAGE_STATE, lastPage);
         Parcelable listState = mRecyclerView.getLayoutManager().onSaveInstanceState();
         outState.putParcelable(KEY_RECYCLER_STATE, listState);
         super.onSaveInstanceState(outState);
@@ -129,14 +127,14 @@ public class MoviesActivity extends AppCompatActivity
     @Override
     public void onClick(View view, int position) {
         Movie clickedMovie = movies.get(position);
-        Log.d(TAG,"Clicked Position: "+Integer.toString(position));
-        Log.d(TAG, "Movie: "+clickedMovie.toString());
-        Log.d(TAG, "Movie Popular Vote: "+clickedMovie.getVoteAverage());
+        Log.d(TAG, "Clicked Position: " + Integer.toString(position));
+        Log.d(TAG, "Movie: " + clickedMovie.toString());
+        Log.d(TAG, "Movie Popular Vote: " + clickedMovie.getVoteAverage());
 
         MovieDbApi movieDbApi = MovieDbApi.getInstance();
-        if(clickedMovie.isPopular()){
+        if (clickedMovie.isPopular()) {
             IntentItem intent = new IntentItem(this, IntentItem.IntentType.PLAY_VIDEO);
-            movieDbApi.getVideoAndPlayWithIntent(this, intent,clickedMovie.getId());
+            movieDbApi.getVideoAndPlayWithIntent(this, intent, clickedMovie.getId());
         } else {
             Intent i = new Intent(context, new MovieDetailsActivity().getClass());
             i.putExtra("movie", clickedMovie);
@@ -179,14 +177,13 @@ public class MoviesActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(layoutManager);
 
 
-
         // Retain an instance so that you can call `resetState()` for fresh searches
-        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager)mRecyclerView.getLayoutManager()) {
+        scrollListener = new EndlessRecyclerViewScrollListener((LinearLayoutManager) mRecyclerView.getLayoutManager()) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 lastPage = page;
                 MovieDbApi movieDbApi = MovieDbApi.getInstance();
-                movieDbApi.getMoviesWithCallback(mOnApiCallInfiniteScrollCompleted,type,page);
+                movieDbApi.getMoviesWithCallback(mOnApiCallInfiniteScrollCompleted, type, page);
             }
         };
         // Adds the scroll listener to RecyclerView
@@ -198,13 +195,13 @@ public class MoviesActivity extends AppCompatActivity
      *
      * @param jsonData
      */
-    private void appendToRecyclerView(String jsonData){
+    private void appendToRecyclerView(String jsonData) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.moviesRecyclerView);
         int currentSize = movies.size();
         getMovies(jsonData);
         int newSize = movies.size();
         MovieAdapter adapter = (MovieAdapter) recyclerView.getAdapter();
-        adapter.notifyItemRangeInserted(currentSize-1,newSize-currentSize);
+        adapter.notifyItemRangeInserted(currentSize - 1, newSize - currentSize);
 
 
     }
@@ -220,7 +217,7 @@ public class MoviesActivity extends AppCompatActivity
 
             int dataSize = results.length();
 
-            if(movies == null) {
+            if (movies == null) {
                 movies = new ArrayList<>(dataSize);
             }
 
